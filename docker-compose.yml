@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:13.3
+    ports:
+      - 5431:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: currency
+
+  scheduler:
+    image: currency-service:latest
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/currency
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - CURRENCY_API_URL=https://currate.ru/api
+      - CURRENCY_API_PAIRS=USDRUB,EURRUB,GBPRUB
+      - CURRENCY_API_GET=rates
+      - CURRENCY_API_KEY=193ca24a83a5cc1334c316d1c71f6e56
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin

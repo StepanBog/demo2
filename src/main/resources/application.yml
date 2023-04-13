@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: feign
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+    show-sql: true
+
+currency:
+  url: ${CURRENCY_API_URL}
+  pairs: ${CURRENCY_API_PAIRS}
+  get: ${CURRENCY_API_GET}
+  key: ${CURRENCY_API_KEY}
+management:
+  endpoints.web.exposure.include: 'prometheus, health'
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
