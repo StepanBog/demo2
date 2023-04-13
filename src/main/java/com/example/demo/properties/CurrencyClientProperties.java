@@ -14,5 +14,4 @@ public class CurrencyClientProperties {
     String rateType;
     Boolean lastActualForDate;
     String clientType;
-    ZonedDateTime date;
 }

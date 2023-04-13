@@ -2,7 +2,7 @@ spring:
   profiles:
     active: feign
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/currency}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5431/currency}
     username: ${SPRING_DATASOURCE_USERNAME:admin}
     password: ${SPRING_DATASOURCE_PASSWORD:admin}
     driver-class-name: org.postgresql.Driver
@@ -14,11 +14,10 @@ spring:
 
 currency:
   url: ${CURRENCY_API_URL:https://alfabank.ru/api/v1/scrooge/currencies/alfa-rates}
-  currency-code: ${CURRENCY_API_PAIRS:USD}
-  rate-type: ${CURRENCY_API_GET:makeCash}
-  last-actual-for-date: ${CURRENCY_API_KEY:true}
-  clientType: ${CURRENCY_API_KEY:standardCC}
-  date: ${CURRENCY_API_KEY:2022-04-10T02:45:34+03:00}
+  currency-codes: ${CURRENCY_CODES:USD,EUR,GBP}
+  rate-type: ${CURRENCY_RATE_TYPE:makeCash}
+  last-actual-for-date: ${CURRENCY_LAST_ACTUAL_FOR_DATE:true}
+  clientType: ${CURRENCY_CLIENT_TYPE:standardCC}
 management:
   endpoints.web.exposure.include: 'prometheus, health'
   metrics:

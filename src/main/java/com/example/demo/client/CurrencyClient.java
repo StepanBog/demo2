@@ -17,5 +17,5 @@ public interface CurrencyClient {
                                    @RequestParam(value = "rateType.eq") String rateType,
                                    @RequestParam(value = "lastActualForDate.eq") Boolean lastActualForDate,
                                    @RequestParam(value = "clientType.eq") String clientType,
-                                   @RequestParam(value = "date.lte") ZonedDateTime date);
+                                   @RequestParam(value = "date.lte") String date);
 }

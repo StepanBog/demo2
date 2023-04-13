@@ -9,6 +9,7 @@ import com.example.demo.repository.CurrencyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class CurrencyService {
 
     public void getCurrenciesFromClient() {
         CurrencyResponse currencies = currencyClient.getCurrencies(clientProperties.getCurrencyCodes(), clientProperties.getRateType(),
-                clientProperties.getLastActualForDate(), clientProperties.getClientType(), clientProperties.getDate());
+                clientProperties.getLastActualForDate(), clientProperties.getClientType(), ZonedDateTime.now().toString());
 
         currencyTracker.track(currencies);
 

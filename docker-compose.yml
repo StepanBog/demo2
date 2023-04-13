@@ -19,10 +19,12 @@ services:
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create
-      - CURRENCY_API_URL=https://currate.ru/api
-      - CURRENCY_API_PAIRS=USDRUB,EURRUB,GBPRUB
-      - CURRENCY_API_GET=rates
-      - CURRENCY_API_KEY=193ca24a83a5cc1334c316d1c71f6e56
+      - CURRENCY_API_URL=https://alfabank.ru/api/v1/scrooge/currencies/alfa-rates
+      - CURRENCY_CODES:USD,EUR,GBP
+      - CURRENCY_RATE_TYPE:makeCash
+      - CURRENCY_LAST_ACTUAL_FOR_DATE:true
+      - CURRENCY_CLIENT_TYPE:standardCC
+
 
   prometheus:
     image: prom/prometheus
