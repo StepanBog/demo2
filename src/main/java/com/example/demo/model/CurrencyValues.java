@@ -2,9 +2,10 @@ package com.example.demo.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class CurrencyValues {
-    Double USDRUB;
-    Double EURRUB;
-    Double GBPRUB;
+    String currencyCode;
+    List<RateByClientType> rateByClientType;
 }

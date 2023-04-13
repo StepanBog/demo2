@@ -4,13 +4,15 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
+
 @Data
 @Component
 @ConfigurationProperties(prefix = "currency")
 public class CurrencyClientProperties {
-
-    private String url;
-    private String key;
-    private String get;
-    private String pairs;
+    String currencyCodes;
+    String rateType;
+    Boolean lastActualForDate;
+    String clientType;
+    ZonedDateTime date;
 }

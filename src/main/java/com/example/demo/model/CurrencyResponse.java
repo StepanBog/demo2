@@ -2,10 +2,10 @@ package com.example.demo.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class CurrencyResponse {
 
-    Integer status;
-    String message;
-    CurrencyValues data;
+    List<CurrencyValues> data;
 }

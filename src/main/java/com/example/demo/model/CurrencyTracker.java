@@ -21,8 +21,14 @@ public class CurrencyTracker {
     }
 
     public void track(CurrencyResponse currencyResponse) {
-        USDRUB.set(currencyResponse.getData().getUSDRUB());
-        EURRUB.set(currencyResponse.getData().getEURRUB());
-        GBPRUB.set(currencyResponse.getData().getGBPRUB());
+        EURRUB.set(currencyResponse.getData().get(0).getRateByClientType().get(0)
+                           .getRatesByType().get(0)
+                           .getLastActualRate().getSell().getOriginalValue());
+        GBPRUB.set(currencyResponse.getData().get(1).getRateByClientType().get(0)
+                           .getRatesByType().get(0)
+                           .getLastActualRate().getSell().getOriginalValue());
+        USDRUB.set(currencyResponse.getData().get(2).getRateByClientType().get(0)
+                           .getRatesByType().get(0)
+                           .getLastActualRate().getSell().getOriginalValue());
     }
 }

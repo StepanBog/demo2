@@ -31,24 +31,19 @@ public class CurrencyService {
     }
 
     public void getCurrenciesFromClient() {
-        CurrencyResponse currencies = currencyClient.getCurrencies(clientProperties.getGet(), clientProperties.getPairs(), clientProperties.getKey());
+        CurrencyResponse currencies = currencyClient.getCurrencies(clientProperties.getCurrencyCodes(), clientProperties.getRateType(),
+                clientProperties.getLastActualForDate(), clientProperties.getClientType(), clientProperties.getDate());
 
         currencyTracker.track(currencies);
 
-        List<CurrencyEntity> currencyEntities = new ArrayList<>(List.of(
-                CurrencyEntity.builder()
-                        .currency("EURRUB")
-                        .value(currencies.getData().getEURRUB())
-                        .build(),
-                CurrencyEntity.builder()
-                        .currency("USDRUB")
-                        .value(currencies.getData().getUSDRUB())
-                        .build(),
-                CurrencyEntity.builder()
-                        .currency("GBPRUB")
-                        .value(currencies.getData().getGBPRUB())
-                        .build()
-        ));
+        List<CurrencyEntity> currencyEntities = new ArrayList<>();
+        currencies.getData().forEach(currency -> currencyEntities.add(CurrencyEntity.builder()
+                                                                              .currency(currency.getCurrencyCode())
+                                                                              .value(currency.getRateByClientType().get(0)
+                                                                                             .getRatesByType().get(0)
+                                                                                             .getLastActualRate().getSell().getOriginalValue())
+                                                                              .build()));
+
         currencyRepository.saveAll(currencyEntities);
     }
 
